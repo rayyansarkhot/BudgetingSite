@@ -67,7 +67,6 @@ app.post('/envelopes/add', (req,res,next) => {
     // If it does not exist, then it proceeds to add to envelopes array.
     else {
 
-
         // Converts string numbers to numbers.
         req.query.budget = Number(req.query.budget);
         req.query.used = Number(req.query.used)
@@ -125,6 +124,30 @@ app.put('/envelopes/update/:name', (req,res,next) => {
         
         }
 
+});
+
+// Delete endpoint deletes one specific envelope.
+app.delete('/envelopes/delete/:name', (req,res,next) => {
+
+    // Flag indicates whether envelope exists in array.
+    let index = -1;
+    
+    // Loops through envelopes array to check if envelope exists.
+    for(let i = 0; i < envelopes.length; i++) {
+        if(envelopes[i].name === req.params.name.toLowerCase()){ 
+            index = i;
+        }
+    }
+
+    // Checks if envelope does not exists.
+    if(index === -1) {
+        res.status(400).send('ENVELOPE DOES NOT EXIST');
+    } else {
+        // Removes envelope from the array.
+        envelopes.splice(index, 1);
+        res.status(200).send('SUCCESSFULLY DELETED AN ENVELOPE.');   
+    }
+    
 });
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
