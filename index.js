@@ -150,4 +150,43 @@ app.delete('/envelopes/delete/:name', (req,res,next) => {
     
 });
 
+// Put endpoint takes one envelope's budget and allocates to another.
+app.put('/envelopes/transfer/:from/:to', (req,res,next) => {
+
+    // Flag indicates whether envelope exists in array.
+    let indexFrom = -1;
+    let indexTo = -1;
+
+    // Loops through envelopes array to check if envelope exists.
+    for(let i = 0; i < envelopes.length; i++) {
+        
+        // Checks if from paramater exists in array.
+        if(envelopes[i].name === req.params.from.toLowerCase())
+            indexFrom = i;
+        // Checks if to paramater exists in array.
+        if(envelopes[i].name === req.params.to.toLowerCase())
+            indexTo = i;
+        
+    }
+
+    // Checks if envelope does not exists.
+    if(indexFrom === -1 || indexTo === -1) {
+        res.status(400).send('ENVELOPE DOES NOT EXIST');
+    } else {
+
+        // If statement checks if amount trying to transfer from former envelope is available.  
+        if(envelopes[indexFrom].budget < Number(req.query.amount)) {
+            res.status(400).send("TRANSFER AMOUNT EXCEEDS BUDGET.");
+        } else {
+
+            // Transfer budget from one envelope to other.
+            envelopes[indexTo].budget += Number(req.query.amount);
+            envelopes[indexFrom].budget -= Number(req.query.amount);
+
+            res.status(200).send('SUCCESSFULLY TRANSFERED FUNDS.');
+
+        }
+    }
+});
+
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
