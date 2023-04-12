@@ -21,7 +21,7 @@ You may begin by seeing what envelopes are present using the 'GET ALL ENVELOPES'
 ## Technologies
 
 **HTML**
-- I used HTML to create the structure of the website with a title, forms, and buttons. This code is available in *index.html*.
+- I used HTML to create the structure of the website with a title, forms, and buttons. This code is available in *index.html*.  
 **CSS** 
 - CSS was used to style and color HTML elements. This code is available in *index.css*.
 **Javascript** & **Node** 
