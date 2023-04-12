@@ -1,69 +1,36 @@
 body {
     background-color: #1A4B76;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: xx-large;
+    font-size: large;
     text-align: center;
     box-sizing: border-box;
-
 }
 
 
 #flexBox {
     display: flex;
+    flex-wrap: wrap; 
+
 }
-#getAllEnvelopesBox {
+#getAllEnvelopesBox, #createNewEnvelopeBox, #specificEnvelopeBox, #updateEnvelopeBox, #deleteEnvelopeBox, #transferEnvelopeBox {
 
     padding: 1%;
     color: thistle;
     background-color: white;
     width: 10%;
     /* float: left; */
-    margin: 2%;
+    /* margin: 1%; */
     flex: 1;
     border: 1px solid blueviolet;
+    padding:1%;
+
 
 }
 
-#createNewEnvelopeBox {
-
-    border: 1px solid blueviolet;
-    margin: 2%;
+#envelopes {
+    display: flex;
+    flex-wrap: wrap; 
+    font-size: large;
     padding: 1%;
-    color: thistle;
-    background-color: white;
-    width: 15%;
-    margin: auto;
-    /* float: left; */
-    flex: 1;
-
-    font-size: small;
-
-}
-
-#specificEnvelopeBox {
-
-    border: 1px solid blueviolet;
-    margin: 2%;
-    padding: 1%;
-    color: thistle;
-    background-color: white;
-    width: 15%;
-    margin: auto;
-    flex: 1;
-    font-size: small;
-
-}
-
-#updateEnvelopeBox {
-
-    border: 1px solid blueviolet;
-    margin: 2%;
-    padding: 1%;
-    color: thistle;
-    background-color: white;
-    width: 15%;
-    margin: auto;
-    flex: 1;
-    font-size: small;
-
+    margin: 1%;
 }

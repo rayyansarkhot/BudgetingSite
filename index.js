@@ -2,8 +2,9 @@ let createButton = document.getElementById('getAllEnvelopes');
 let createForm = document.getElementById('createForm');
 let getForm = document.getElementById('getForm');
 let updateForm = document.getElementById('updateForm');
+let deleteForm = document.getElementById('deleteForm');
+let transferForm = document.getElementById('transferForm');
 let divArray = [];
-
 
 // Creates divs and styles them according to number of envelopes created.
 let createEnvelopeBox = (name, budget, used) => {
@@ -63,11 +64,14 @@ const getAll = async () => {
     // Redefined from string to object so properties are more accessibile.
     all = JSON.parse(all);
 
-    // Loop calls function to create envelope spaces with info.
-    for(let x = 0; x < all.length; x++ ) {
-        createEnvelopeBox(all[x].name, all[x].budget, all[x].used);
+    if(all.length === 0) {
+        alert('NO ENVELOPES AVAILABLE.')
+    } else {
+        // Loop calls function to create envelope spaces with info.
+        for(let x = 0; x < all.length; x++ ) {
+            createEnvelopeBox(all[x].name, all[x].budget, all[x].used);
+        }
     }
-
     
 };
 
@@ -87,7 +91,7 @@ let createEnvelope = async (e) => {
         deleteDivs();// Removes before created divs from page.
         e.preventDefault();
 
-        // Sends an API request to get all envelopes.
+        // Sends an API request to create an envelopes.
         await fetch(`http://localhost:3000/envelopes/add?name=${name}&budget=${budget}&used=${used}`,
         { 
             method: 'POST', 
@@ -119,7 +123,7 @@ let getSpecificEnvelope = async (e) => {
         e.preventDefault();
         let responseStatus;// Holds http status code of below fetch.
 
-        // Sends an API request to get all envelopes.
+        // Sends an API request to get an envelope.
         await fetch(`http://localhost:3000/envelopes/${nombre}`).then(response => {
             // Attached reader to readableStream obj.
             reader = response.body.getReader();
@@ -166,7 +170,6 @@ let updateEnvelope = async (e) => {
     let budget = document.getElementById('updateBudget').value;
     let used = document.getElementById('updateUsed').value;
 
-    console.log(`${name}?budget=${budget}&used=${used}`);
     // Checks if any field were left empty.
     if (name === "" || ( used === "" && budget === "" )) {
         alert("Ensure you input a value in the name and another field!");
@@ -175,7 +178,7 @@ let updateEnvelope = async (e) => {
         deleteDivs();// Removes before created divs from page.
         e.preventDefault();
 
-        // Sends an API request to get all envelopes.
+        // Sends an API request to update an envelope.
         await fetch(`http://localhost:3000/envelopes/update/${name}?budget=${budget}&used=${used}`,
         { 
             method: 'PUT', 
@@ -199,7 +202,122 @@ let updateEnvelope = async (e) => {
 
 };
 
+// Function deletes a specific envelope.
+let deleteEnvelope = async (e) => {
+
+    let reader;
+    let all;
+
+    // Takes input entered from form.
+    let nombre = document.getElementById('deleteEnvelope').value;
+
+    // Checks if any field were left empty.
+    if (nombre === "") {
+        alert("Ensure you input a value!");
+    } else {
+
+        deleteDivs();// Removes before created divs from page.
+        e.preventDefault();
+        let responseStatus;// Holds http status code of below fetch.
+
+        // Sends an API request to delete an envelope.
+        await fetch(`http://localhost:3000/envelopes/delete/${nombre}`,
+        { 
+            method: 'DELETE', 
+            mode: "cors"
+        }).then(response => {
+            // Attached reader to readableStream obj.
+            reader = response.body.getReader();
+            responseStatus = response.status;
+            
+        });
+        // Reader reads from readableStream object.
+        await reader.read().then(function process(done, value) {
+
+            // Decodes array and places it into a variable.
+            all = new TextDecoder().decode(done.value);
+
+            // Checks if proper status code was recieved.
+            if(responseStatus === 200) {
+                alert('Successfully deleted envelope.')
+            } else {
+                // Throws errow to be caught by catch statement below.
+                throw new Error(all);
+            }
+
+        }).catch((errorResponse) => {
+        
+            // Displays error message.
+            alert(errorResponse.message);
+        
+        });
+    }
+};
+
+// Function transfer budget from one envelope to another.
+let transferEnvelope = async(e) => {
+
+    let reader;
+    let all;
+
+    // Takes input entered from form.
+    let fromEnvelope = document.getElementById('fromEnvelope').value;
+    let toEnvelope = document.getElementById('toEnvelope').value;
+    let transferAmount = document.getElementById('transferAmount').value;
+
+    // Checks if any fields were left empty.
+    if (fromEnvelope === "" || transferAmount === "" || toEnvelope === "") {
+        alert("Ensure you input a value in all fields!");
+    } 
+    // Else if fires if client entered a non-number.
+    else if (!Number(transferAmount)) {
+        alert('Enter a valid number in transfer amount field.')
+    } 
+    else {
+
+        deleteDivs();// Removes before created divs from page.
+        e.preventDefault();
+        let responseStatus;// Holds http status code of below fetch.
+
+        // Sends an API request to transfer envelope funds.
+        await fetch(`http://localhost:3000/envelopes/transfer/${fromEnvelope}/${toEnvelope}?amount=${transferAmount}`,
+        { 
+            method: 'PUT', 
+            mode: "cors"
+        }).then(response => {
+            // Attached reader to readableStream obj.
+            reader = response.body.getReader();
+            responseStatus = response.status;
+        });
+
+        // Reader reads from readableStream object.
+        await reader.read().then(function process(done, value) {
+
+            // Decodes array and places it into a variable.
+            all = new TextDecoder().decode(done.value);
+
+            // Checks if proper status code was recieved.
+            if(responseStatus === 200) {
+                alert('SUCCESSFULLY TRANSFERED FUNDS.')
+            } else {
+                // Throws errow to be caught by catch statement below.
+                throw new Error(all);
+            }
+
+        }).catch((errorResponse) => {
+        
+            // Displays error message.
+            alert(errorResponse.message);
+        
+        });
+
+    }
+
+};
+
 createButton.onclick = getAll;
 createForm.addEventListener('submit', createEnvelope);
 getForm.addEventListener('submit', getSpecificEnvelope);
 updateForm.addEventListener('submit', updateEnvelope);
+deleteForm.addEventListener('submit', deleteEnvelope);
+transferForm.addEventListener('submit', transferEnvelope);

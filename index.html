@@ -55,7 +55,7 @@
           <br>
 
           <section class="submission">
-            <button type="submit">CREATE</button>
+            <button type="submit">GET ENVELOPE</button>
           </section>
 
         </form>
@@ -79,14 +79,60 @@
           <input type="text" name="updateUsed" id="updateUsed">
 
           <section class="submission">
-            <button type="submit">CREATE</button>
+            <button type="submit">UPDATE</button>
           </section>
 
         </form>
 
       </div>
 
+      <!-- Form to delete an envelope  -->
+      <div id = "deleteEnvelopeBox">
+
+        <form action="" method="DELETE" id="deleteForm">
+
+          <h3>DELETE AN ENVELOPE</h3>
+
+          <label for="deleteEnvelope">Envelope Name:</label>
+          <input type="text" name="deleteEnvelope" id="deleteEnvelope">
+          <br>
+
+          <section class="submission">
+            <button type="submit">DELETE</button>
+          </section>
+
+        </form>
+
+      </div>
+
+      <!-- Form to transfer budget of one envelope to other.  -->
+      <div id = "transferEnvelopeBox">
+
+        <form action="" method="PUT" id="transferForm">
+
+          <h3>TRANSFER BUDGETS</h3>
+
+          <label for="fromEnvelope">Envelope Name To Transfer From:</label>
+          <input type="text" name="fromEnvelope" id="fromEnvelope">
+          <br>
+          <label for="toEnvelope">Envelope Name To Transfer To:</label>
+          <input type="text" name="toEnvelope" id="toEnvelope">
+          <br>
+          <label for="transferAmount">Transfer Amount:</label>
+          <input type="text" name="transfer" id="transferAmount">
+          <br>
+
+          <section class="submission">
+            <button type="submit">TRANSFER</button>
+          </section>
+
+        </form>
+
+      </div>
+
+
     </div> 
+
     <!-- Container for envelopes -->
     <div id="envelopes"></div>
 

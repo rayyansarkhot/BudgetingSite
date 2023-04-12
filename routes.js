@@ -50,7 +50,6 @@ app.post('/envelopes/add', (req,res,next) => {
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"
       );
-    console.log(req.params.name);
 
     // Flag indicates whether budget name is valid.
     let flag = false;
@@ -152,7 +151,7 @@ app.delete('/envelopes/delete/:name', (req,res,next) => {
     
     // Loops through envelopes array to check if envelope exists.
     for(let i = 0; i < envelopes.length; i++) {
-        if(envelopes[i].name === req.params.name.toLowerCase()){ 
+        if(envelopes[i].name.toLowerCase() === req.params.name.toLowerCase()){ 
             index = i;
         }
     }
@@ -171,6 +170,7 @@ app.delete('/envelopes/delete/:name', (req,res,next) => {
 // Put endpoint takes one envelope's budget and allocates to another.
 app.put('/envelopes/transfer/:from/:to', (req,res,next) => {
 
+    
     // Flag indicates whether envelope exists in array.
     let indexFrom = -1;
     let indexTo = -1;
@@ -179,10 +179,10 @@ app.put('/envelopes/transfer/:from/:to', (req,res,next) => {
     for(let i = 0; i < envelopes.length; i++) {
         
         // Checks if from paramater exists in array.
-        if(envelopes[i].name === req.params.from.toLowerCase())
+        if(envelopes[i].name.toLowerCase() === req.params.from.toLowerCase())
             indexFrom = i;
         // Checks if to paramater exists in array.
-        if(envelopes[i].name === req.params.to.toLowerCase())
+        if(envelopes[i].name.toLowerCase() === req.params.to.toLowerCase())
             indexTo = i;
         
     }
