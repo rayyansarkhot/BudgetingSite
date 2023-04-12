@@ -106,13 +106,16 @@ app.put('/envelopes/update/:name', (req,res,next) => {
         res.status(400).send('ENVELOPE DOES NOT EXIST');
     } else {
 
+        let flagA = false;
+        let flagB = false;
+
         // If statement checks if user's used query is a valid value.
         if(Number(req.query.used)) {
             envelopes[index].used += Number(req.query.used);// Increases used value.   
         } 
         // This fires if the user entered an invalid number. Not if it hasn't been entered.
-        else if(req.query.used !== undefined) {
-            res.status(400).send('USED VALUE IS NOT A NUMBER');
+        else if(req.query.used !== '') {            
+            flagA = true;
         }
 
         // If statement checks if user's budget query is a valid value.
@@ -120,8 +123,8 @@ app.put('/envelopes/update/:name', (req,res,next) => {
             envelopes[index].budget = Number(req.query.budget);// Sets budget.    
         } 
         // This fires if the user entered an invalid number. Not if it hasn't been entered.
-        else if(req.query.budget !== undefined) {
-            res.status(400).send('BUDGET VALUE IS NOT A NUMBER');
+        else if(req.query.budget !== '') {
+            flagB = true;
         }
 
         // If statement checks if user sent in a value for renaming.
@@ -129,10 +132,15 @@ app.put('/envelopes/update/:name', (req,res,next) => {
             envelopes[index].name = req.query.nombre// Sets name.    
         }
         
-        // Responds to client with remaining balance.
-        res.status(200).send('ENVELOPE SUCCESSFULLY UPDATED.');         
-        
-        }
+        if(flagA) {
+            res.status(400).send('USED VALUE IS NOT A NUMBER');
+        } else if (flagB) {
+            res.status(400).send('BUDGET VALUE IS NOT A NUMBER');      
+        } else {
+            // Responds to client with remaining balance.
+            res.status(200).send('ENVELOPE SUCCESSFULLY UPDATED.');         
+        }    
+    }
 
 });
 

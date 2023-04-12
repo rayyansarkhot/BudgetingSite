@@ -12,26 +12,7 @@
     <h1>ENVELOPE BUDGET</h1>
 
     <!-- Container for envelope actions -->
-    <!-- <div>
-      <form action="index.html" method="POST">
-        <h5>Create an Envelope</h5>
-        <section class="update">
-
-          <label for="name">Envelope Name:</label>
-    			<input type="text" name="name" id="envelopeName">
-
-          <label for="budget">Budget:</label>
-    			<input type="text" name="budget" id="budgetAmount">
-          
-          <label for="used">Already Used:</label>
-    			<input type="text" name="used" id="usedAmount">
-
-          <section class="submission">
-            <input type="submit" value="Create">
-          </section>
-
-        </section>
-      </form> -->
+    <div id="flexBox">
 
       <div id = "getAllEnvelopesBox">
         <!-- Button to get all envelopes. -->
@@ -45,13 +26,13 @@
 
           <h3>CREATE A NEW ENVELOPE</h3>
 
-          <label for="name">Envelope Name:</label>
+          <label for="name">Envelope Name:<br></label>
           <input type="text" name="name" id="name">
           <br>
           <label for="budget">Budget:<br></label>
           <input type="text" name="budget" id="budget">
           <br>
-          <label for="used">Already Used:</label>
+          <label for="used">Already Used:<br></label>
           <input type="text" name="used" id="used">
 
           <section class="submission">
@@ -63,7 +44,7 @@
       </div>
 
       <!-- Form to get a specific envelope  -->
-      <div id = "createNewEnvelopeBox">
+      <div id = "specificEnvelopeBox">
 
         <form action="" method="GET" id="getForm">
 
@@ -81,15 +62,33 @@
 
       </div>
 
+      <!-- Form to update an envelope  -->
+      <div id = "updateEnvelopeBox">
+
+        <form action="" method="PUT" id="updateForm">
+
+          <h3>UPDATE AN ENVELOPE</h3>
+
+          <label for="updateName">Envelope Name:<br></label>
+          <input type="text" name="updateName" id="updateName">
+          <br>
+          <label for="updateBudget">Budget:<br></label>
+          <input type="text" name="updateBudget" id="updateBudget">
+          <br>
+          <label for="updateUsed">Already Used:<br></label>
+          <input type="text" name="updateUsed" id="updateUsed">
+
+          <section class="submission">
+            <button type="submit">CREATE</button>
+          </section>
+
+        </form>
+
+      </div>
+
     </div> 
     <!-- Container for envelopes -->
-    <div id="envelopes">
-      <section>
-        
-        
-
-      </section>
-    </div>
+    <div id="envelopes"></div>
 
     <script src="index.js"></script>
 
