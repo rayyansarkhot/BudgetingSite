@@ -6,3 +6,30 @@ body {
     box-sizing: border-box;
 
 }
+
+#getAllEnvelopesBox {
+
+    padding: 1%;
+    color: thistle;
+    background-color: white;
+    width: 10%;
+    float: left;
+    margin: 2%;
+
+    border: 1px solid blueviolet;
+
+}
+
+#createNewEnvelopeBox {
+
+    border: 1px solid blueviolet;
+    margin: 2%;
+    padding: 1%;
+    color: thistle;
+    background-color: white;
+    width: 15%;
+    margin: auto;
+    float: left;
+    font-size: small;
+
+}

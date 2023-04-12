@@ -12,8 +12,7 @@
     <h1>ENVELOPE BUDGET</h1>
 
     <!-- Container for envelope actions -->
-    <div>
-      <!-- Form for updating an envelope.
+    <!-- <div>
       <form action="index.html" method="POST">
         <h5>Create an Envelope</h5>
         <section class="update">
@@ -33,9 +32,56 @@
 
         </section>
       </form> -->
-      <button id="getAllEnvelopes">GET ALL ENVELOPES</button>
 
-    </div>
+      <div id = "getAllEnvelopesBox">
+        <!-- Button to get all envelopes. -->
+        <button id="getAllEnvelopes">GET ALL ENVELOPES</button>
+      </div>
+
+      <!-- Form to create a new envelope  -->
+      <div id = "createNewEnvelopeBox">
+
+        <form action="" method="POST" id="createForm">
+
+          <h3>CREATE A NEW ENVELOPE</h3>
+
+          <label for="name">Envelope Name:</label>
+          <input type="text" name="name" id="name">
+          <br>
+          <label for="budget">Budget:<br></label>
+          <input type="text" name="budget" id="budget">
+          <br>
+          <label for="used">Already Used:</label>
+          <input type="text" name="used" id="used">
+
+          <section class="submission">
+            <button type="submit">CREATE</button>
+          </section>
+
+        </form>
+
+      </div>
+
+      <!-- Form to get a specific envelope  -->
+      <div id = "createNewEnvelopeBox">
+
+        <form action="" method="GET" id="getForm">
+
+          <h3>GET AN ENVELOPE</h3>
+
+          <label for="specificEnvelope">Envelope Name:</label>
+          <input type="text" name="specificEnvelope" id="specificEnvelope">
+          <br>
+
+          <section class="submission">
+            <button type="submit">CREATE</button>
+          </section>
+
+        </form>
+
+      </div>
+
+    </div> 
     <!-- Container for envelopes -->
     <div id="envelopes">
       <section>

@@ -45,6 +45,13 @@ app.get('/envelopes/:name', (req,res,next) => {
 // Post endpoint to add an envelope.
 app.post('/envelopes/add', (req,res,next) => {
     
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+      );
+    console.log(req.params.name);
+
     // Flag indicates whether budget name is valid.
     let flag = false;
     

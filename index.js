@@ -1,4 +1,6 @@
 let createButton = document.getElementById('getAllEnvelopes');
+let createForm = document.getElementById('createForm');
+let getForm = document.getElementById('getForm');
 let divArray = [];
 
 // Function is responsible for getting all envelopes.
@@ -54,6 +56,36 @@ let createEnvelope = (name, budget, used) => {
 
 };
 
+// Function takes data from form and sends it to api.
+let receiveData = async (e) => {
+    
+    // Takes input entered from form.
+    let name = document.getElementById('name').value;
+    let budget = document.getElementById('budget').value;
+    let used = document.getElementById('used').value;
+
+    // Checks if any field were left empty.
+    if (name === "" || used === "" || budget === "" ) {
+        alert("Ensure you input a value all fields!");
+    } else {
+
+        deleteDivs();// Removes before created divs from page.
+        e.preventDefault();
+
+        // Sends an API request to get all envelopes.
+        await fetch(`http://localhost:3000/envelopes/add?name=${name}&budget=${budget}&used=${used}`,
+        { 
+            method: 'POST', 
+            mode: "cors"
+        })
+        .then(response => {
+            alert(`Successfully created new envelope:\nname: ${name}\nbudget: ${budget}\nused: ${used}`);
+        });
+        
+    }
+
+};
+
 // Deletes divs on screen so new option can appear.
 let deleteDivs = () => {
     
@@ -69,3 +101,5 @@ let deleteDivs = () => {
 
 
 createButton.onclick = getAll;
+createForm.addEventListener('submit', receiveData);
+getForm.addEventListener('submit', getSpecificEnvelope);
