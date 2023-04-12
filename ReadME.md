@@ -20,6 +20,7 @@ You may begin by seeing what envelopes are present using the 'GET ALL ENVELOPES'
 
 ## Technologies
 
-I used **HTML** to create the structure of the website with a title, forms, and buttons.
-**CSS** was used to style and color HTML elements.
-**Javascript** was used alongside **Node** and **Express** to create an API with routes and numerous functions that acted as middleware to interact with these routes.
+I used **HTML** to create the structure of the website with a title, forms, and buttons. This code is available in *index.html*.
+**CSS** was used to style and color HTML elements. This code is available in *index.css*.
+**Javascript** and **Node** was used to create several functions that would make the buttons functional and interact with an API. This code is available in *index.js*.
+**Express** was used to create an API with routes that interacted with *index.js* to send and receive data. This code is available in *routes.js*.
